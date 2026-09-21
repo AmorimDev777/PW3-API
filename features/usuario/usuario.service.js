@@ -3,7 +3,7 @@ import  pool  from '../../data/index.js';
 export const consultarTudo = async () => {
     try {
         const cx = await pool.getConnection();
-        const cmdSql = `SELECT * FROM usuarios`;
+        const cmdSql = `SELECT * FROM usuario`;
         const [dados, meta_dados] = await cx.query(cmdSql);
         cx.release();
         return dados;
@@ -15,7 +15,7 @@ export const consultarTudo = async () => {
 export const consultarPorId = async (id) => {
     try {
         const cx = await pool.getConnection();
-        const cmdSql = 'SELECT * FROM usuarios WHERE usuarios.id = ?';
+        const cmdSql = 'SELECT * FROM usuario WHERE usuario.id = ?';
         const [dados, meta_dados] = await cx.query(cmdSql, [id]);
         cx.release();
         return dados;
@@ -27,13 +27,13 @@ export const consultarPorId = async (id) => {
 export const cadastrar = async (Nome, Email, Senha) => {
     try {
         const cx = await pool.getConnection();
-        const cmdSql = 'INSERT INTO usuarios(Nome, Email, Senha) VALUES (?, ?, ?)';
+        const cmdSql = 'INSERT INTO usuario(Nome, Email, Senha) VALUES (?, ?, ?)';
         await cx.query(cmdSql, [Nome, Email, Senha]);
 
         const [result] = await cx.query('SELECT LAST_INSERT_ID() as lastId');
         const lastId = result[0].lastId;
 
-        const [dados, meta_dados] = await cx.query('SELECT * FROM usuarios WHERE id = ?', [lastId]);
+        const [dados, meta_dados] = await cx.query('SELECT * FROM usuario WHERE id = ?', [lastId]);
         cx.release();
         return dados;
     } catch (error) {
@@ -44,10 +44,10 @@ export const cadastrar = async (Nome, Email, Senha) => {
 export const atualizar = async (id, Nome, Email, Senha) => {
     try {
         const cx = await pool.getConnection();
-        const cmdSql = 'UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?';
+        const cmdSql = 'UPDATE usuario SET nome = ?, email = ?, senha = ? WHERE id = ?';
         await cx.query(cmdSql, [Nome, Email, Senha, id]);
 
-        const [dados] = await cx.query('SELECT * FROM usuarios WHERE id = ?', [id]);
+        const [dados] = await cx.query('SELECT * FROM usuario WHERE id = ?', [id]);
         cx.release();
         return dados;
     } catch (error) {
@@ -58,7 +58,7 @@ export const atualizar = async (id, Nome, Email, Senha) => {
 export const excluir = async (id) => {
     try {
         const cx = await pool.getConnection();
-        const cmdSql = 'DELETE FROM usuarios WHERE id = ?';
+        const cmdSql = 'DELETE FROM usuario WHERE id = ?';
         const [result] = await cx.query(cmdSql, [id]);
         cx.release();
         return result;

@@ -3,8 +3,8 @@ http://localhost:3000/atv/
 
 # USUARIO
 {
-  "email": "ocaradomomento@gmail.com",
-  "nome": "O Cara do Momento",
+  "email": "pokas@gmail.com",
+  "nome": "Pokas",
   "senha": "123456"
 }
 

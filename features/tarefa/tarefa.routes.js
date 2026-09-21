@@ -27,8 +27,8 @@ router.get('/tarefa', async (req, res) => {
 
 router.post('/tarefa', async (req, res) => {
     try {
-        const { titulo, descricao, fk_usuario_id } = req.body;
-        const novaTarefa = await Tarefa.cadastrar(titulo, descricao, fk_usuario_id);
+        const { titulo, descricao, fk_usuario_id, data } = req.body;
+        const novaTarefa = await Tarefa.cadastrar(titulo, descricao, fk_usuario_id, data);
         res.status(201).json(novaTarefa);
     } catch (error) {
         console.error('Erro ao cadastrar tarefa:', error);
